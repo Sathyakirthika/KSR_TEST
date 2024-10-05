@@ -5,7 +5,7 @@ const { errorLogger, successLogger } = require('../logger.js');
 moment.tz.setDefault("Asia/Kolkata");
 
 // POST Stock Data
-const poststockData = async (req, res) => {
+const poststock = async (req, res) => {
     const { tankname, oilname, currentquantity, materialtype } = req.body;
 
     try {
@@ -106,4 +106,4 @@ const validateEntries = async (entries) => {
     }
 };
 
-module.exports = { poststockData, stockCheck };
+module.exports = { poststock, stockCheck };
