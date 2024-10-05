@@ -3,7 +3,8 @@ const router = express.Router();
 const {
     // updatestockquantity,
 stockCheck,
-poststock
+poststock,
+getStock
    
 } = require('../controllers/userController');
 const { errorLogger, successLogger } = require('../logger.js');
@@ -17,6 +18,17 @@ router.post('/addStock', async(req, res, next) => {
         })
         .catch((err) => {
             errorLogger.error(`POST /stockData - Error adding tank: ${err.message}`);
+            next(err); // Pass error to express middleware
+        });
+});
+router.get('/getstock',(req, res, next) => {
+    successLogger.info(`get /getstock - Tanks data request received`);
+    getStock(req, res)
+        .then(() => {
+            successLogger.info(`get/getstock - Successfully retrieved tank data`);
+        })
+        .catch((err) => {
+            errorLogger.error(`get /getstock - Error retrieving tanks: ${err.message}`);
             next(err); // Pass error to express middleware
         });
 });

@@ -1,6 +1,7 @@
 {"level":"info","message":"Connected to the database"}
 {"level":"info","message":"Table 'storagetank_Table' created successfully"}
 {"level":"info","message":"Table 'Stock_Table' created successfully"}
-{"level":"info","message":"Connected to the database"}
-{"level":"info","message":"Table 'storagetank_Table' created successfully"}
-{"level":"info","message":"Table 'Stock_Table' created successfully"}
+{"level":"info","message":"get /getstock - Tanks data request received"}
+{"level":"info","message":"get/getstock - Successfully retrieved tank data"}
+{"level":"info","message":"get /getstock - Tanks data request received"}
+{"level":"info","message":"get/getstock - Successfully retrieved tank data"}
