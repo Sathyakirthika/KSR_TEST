@@ -3,7 +3,7 @@ const router = express.Router();
 const {
     // updatestockquantity,
 stockCheck,
-    poststockData
+poststock
    
 } = require('../controllers/userController');
 const { errorLogger, successLogger } = require('../logger.js');
@@ -11,7 +11,7 @@ const { errorLogger, successLogger } = require('../logger.js');
 // Add tanks route
 router.post('/addStock', async(req, res, next) => {
     successLogger.info(`POST /stockData - Add tank request received`);
-    poststockData(req, res)
+    poststock(req, res)
         .then(() => {
             successLogger.info(`POST /stockData - Successfully added tank`);
         })
