@@ -36,6 +36,53 @@ const poststock = async (req, res) => {
     }
 };
 
+const getStock = async (req, res) => {
+    const { tankname } = req.query;
+
+    try {
+        // If tankname is provided, fetch the specific stock
+        if (tankname) {
+            const [results, fields] = await db.promise().query(
+                `SELECT * FROM stock_Table WHERE tankname = ?`,
+                [tankname]
+            );
+
+            console.log('Query Results:', results); // Log the results
+
+            // Check if results is an array
+            if (!Array.isArray(results)) {
+                return res.status(500).json({ success: false, error: 'Query result is not an array' });
+            }
+
+            if (results.length === 0) {
+                return res.status(404).json({ success: false, error: 'Tankname not found' });
+            }
+
+            return res.json({ success: true, data: results });
+        }
+
+        // If no tankname is provided, fetch all stocks
+        const [stocks, fields] = await db.promise().query(
+            `SELECT * FROM stock_Table`
+        );
+
+        console.log('All Stocks:', stocks); // Log the stocks
+
+        // Check if stocks is an array
+        if (!Array.isArray(stocks)) {
+            return res.status(500).json({ success: false, error: 'Query result is not an array' });
+        }
+
+        return res.json({ success: true, data: stocks });
+    } catch (error) {
+        console.error('Error retrieving stock:', error);
+        errorLogger.error('Error retrieving stock: ' + error.message);
+        return res.status(500).json({ success: false, error: 'Internal Server Error' });
+    }
+};
+
+
+
 
 // Stock Check Data
 const stockCheck = async (req, res) => {
@@ -106,4 +153,4 @@ const validateEntries = async (entries) => {
     }
 };
 
-module.exports = { poststock, stockCheck };
+module.exports = { poststock, stockCheck ,getStock};
